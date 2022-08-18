@@ -1,0 +1,11 @@
+{
+  "name": "photos_nfd",
+  "version": "1.0.0",
+  "description": "This program scans your Google photos, and saves a list of every media that takes space from your account into the `photos.txt` file, where the first line is the number of such media, the second line is the total number of media in your account, each subsequent line is an empty line, followed by a link to such a photo, followed by the size in bytes, and repeat.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
