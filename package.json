@@ -10,8 +10,10 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.27.2",
+    "prompt-sync": "^4.2.0",
     "puppeteer": "^16.1.1",
     "puppeteer-extra": "^3.3.4",
-    "puppeteer-extra-plugin-stealth": "^2.11.1"
+    "puppeteer-extra-plugin-stealth": "^2.11.1",
+    "qs": "^6.11.0"
   }
 }
