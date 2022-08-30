@@ -1,31 +1,3 @@
-// awesome work (Queue) stolen from https://www.javascripttutorial.net/javascript-queue/ :)
-class Queue {
-  constructor() {
-    this.elements = {};
-    this.head = 0;
-    this.tail = 0;
-  }
-  enqueue(element) {
-    this.elements[this.tail] = element;
-    this.tail++;
-  }
-  dequeue() {
-    const item = this.elements[this.head];
-    delete this.elements[this.head];
-    this.head++;
-    return item;
-  }
-  peek() {
-    return this.elements[this.head];
-  }
-  get length() {
-    return this.tail - this.head;
-  }
-  get isEmpty() {
-    return this.length === 0;
-  }
-}
-
 function timeout(time) {
   return new Promise(async (res, rej) => {
     setTimeout(() => {
@@ -34,10 +6,21 @@ function timeout(time) {
   });
 }
 
-async function worker(queue, response, batchexecute, cookie, finished, i) {
-  while (!queue.isEmpty) {
-    let newItem = queue.dequeue();
-    if (!newItem[0]) break;
+async function worker(
+  queue,
+  response,
+  batchexecute,
+  cookie,
+  finished,
+  iNumber,
+  i
+) {
+  let position = i;
+  while (position < queue.length) {
+    let newItem = queue[position];
+    console.log(newItem);
+    position += iNumber;
+    if (!newItem) break;
     let resp = await batchexecute(cookie, [
       "lcxiM",
       JSON.stringify([null, newItem[1], null, null, true, 1, newItem[0]]),
@@ -53,17 +36,17 @@ async function worker(queue, response, batchexecute, cookie, finished, i) {
 function gen_gpi(batchexecute) {
   return function getPhotoIds(cookie, photoDates) {
     return new Promise(async (res, _) => {
-      let queue = new Queue();
+      let queue = [];
       photoDates.dates.forEach((item) => {
-        queue.enqueue([item.start, item.end]);
+        queue = queue.concat([[item.start, item.end]]);
       });
       let resp = [];
-      let workers = [];
       let finished = [];
-      for (let i = 0; i < 50; i++) {
-        workers.concat(worker(queue, resp, batchexecute, cookie, finished, i));
+      let iNumber = 50;
+      for (let i = 0; i < iNumber; i++) {
+        worker(queue, resp, batchexecute, cookie, finished, iNumber, i);
       }
-      while (finished.length < 50) {
+      while (finished.length < iNumber) {
         await timeout(500);
       }
       res(
