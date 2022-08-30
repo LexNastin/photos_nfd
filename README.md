@@ -1,7 +1,7 @@
 # Google Photos Non-Free Detector
 
 > **Warning**
-> I am not responsible for anything that happens to your account, as a result of running this program. All the code running is visible to you (despite being semi-obfuscated looking due to Google's APIs being private), so don't blame for anything.
+> I am not responsible for anything that happens to your account, as a result of running this program. All the code running is visible to you (despite being semi-obfuscated looking due to Google's APIs being private), so don't blame me for anything.
 
 This program scans your Google photos, and saves a list of every media that takes space from your account into the `photos.txt` file, where the first line is the number of such media, the second line is the total number of media in your account, each subsequent line is an empty line, followed by a link to such a photo, followed by the size in bytes, and repeat.
 
