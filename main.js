@@ -61,5 +61,8 @@ function getWIZValues(cookie, photosRequest) {
   getWIZValues(cookie, photosRequest);
   let photoDates = await getPhotoDates(cookie, photosRequest);
   let photoIds = await getPhotoIds(cookie, photoDates);
+  let photoIdsFD = fs.openSync(path.join(__dirname, "./photos.txt"), "w+");
+  fs.writeSync(photoIdsFD, photoIds.join("\n"));
+  fs.closeSync(photoIdsFD);
   console.log(photoIds);
 })();
