@@ -49,15 +49,18 @@ function gen_gpi(batchexecute) {
       while (finished.length < iNumber) {
         await timeout(500);
       }
-      res(
-        resp
-          .sort((a, b) => {
-            return a[1] < b[1] ? -1 : 1;
-          })
-          .map((item) => {
-            return item[0];
-          })
-      );
+      // using a set, we have stupidly simple way to dedupe array, by georg from https://stackoverflow.com/questions/9229645/remove-duplicate-values-from-js-array
+      res([
+        ...new Set(
+          resp
+            .sort((a, b) => {
+              return a[1] < b[1] ? -1 : 1;
+            })
+            .map((item) => {
+              return item[0];
+            })
+        ),
+      ]);
     });
   };
 }
