@@ -61,5 +61,5 @@ function getWIZValues(cookie, photosRequest) {
   getWIZValues(cookie, photosRequest);
   let photoDates = await getPhotoDates(cookie, photosRequest);
   let photoIds = await getPhotoIds(cookie, photoDates);
-  console.table(photoIds);
+  console.log(photoIds);
 })();

@@ -26,7 +26,11 @@ function gen_be(request, bl, at, fsid, reqid) {
     );
     let temp = {};
     JSON.parse(resp.data.split("\n")[3]).forEach((item) => {
-      temp[item[1]] = JSON.parse(item[2]);
+      try {
+        temp[item[1]] = JSON.parse(item[2]);
+      } catch (err) {
+        return undefined;
+      }
     });
     return temp;
   };
