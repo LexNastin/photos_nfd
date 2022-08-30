@@ -18,7 +18,7 @@ Run the program:
 node .
 ```
 
-Here's an example of that file:
+Here's an example of the `photos.txt` file:
 
 ```
 3
