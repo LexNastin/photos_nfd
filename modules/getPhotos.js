@@ -21,11 +21,18 @@ async function worker(
     let newItem = queue[position];
     position += iNumber;
     if (!newItem) break;
-    let resp = await batchexecute(cookie, [
-      "fDcn4b",
-      JSON.stringify([newItem, 2]),
-    ]);
+    let resp;
+    while (!resp) {
+      resp = await batchexecute(cookie, [
+        "fDcn4b",
+        JSON.stringify([newItem, 2]),
+      ]).catch((_) => {});
+      if (!resp) {
+        await timeout(3000);
+      }
+    }
     if (!resp) break;
+    if (!resp["fDcn4b"]) console.log(resp);
     let item = resp["fDcn4b"][0];
     if (item[30][0] == 1) {
       response[response.length] = [newItem, item[30][1], item[3]];
