@@ -132,3 +132,7 @@ dist
 # outputs
 cookie.txt
 photos.txt
+photos.json
+
+# backed up files
+*.bak

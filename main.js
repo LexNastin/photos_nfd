@@ -64,12 +64,24 @@ function getWIZValues(cookie, photosRequest) {
   let photoIds = await getPhotoIds(cookie, photoDates);
   let photos = await getPhotos(cookie, photoIds);
   let photoFD = fs.openSync(path.join(__dirname, "./photos.txt"), "w+");
+  let jsonOut = {};
+  let photoJFD = fs.openSync(path.join(__dirname, "./photos.json"), "w+");
   fs.writeSync(photoFD, `${photos.length}\n`);
   fs.writeSync(photoFD, `${photoIds.length}\n`);
+  jsonOut["paid_photos"] = photos.length;
+  jsonOut["total_photos"] = photoIds.length;
+  jsonOut["photos"] = [];
   photos.forEach((photo) => {
     fs.writeSync(photoFD, `\nhttps://photos.google.com/photo/${photo[0]}\n`);
     fs.writeSync(photoFD, `${photo[1]}\n`);
     fs.writeSync(photoFD, `${photo[2]}\n`);
+    jsonOut["photos"] = jsonOut["photos"].concat({
+      uri: `https://photos.google.com/photo/${photo[0]}`,
+      size: photo[1],
+      timestamp: photo[2],
+    });
   });
+  fs.writeSync(photoJFD, JSON.stringify(jsonOut));
   fs.closeSync(photoFD);
+  fs.closeSync(photoJFD);
 })();
