@@ -3,9 +3,6 @@
 > **Warning**
 > I am not responsible for anything that happens to your account, as a result of running this program. All the code running is visible to you (despite being semi-obfuscated looking due to Google's APIs being private), so don't blame me for anything.
 
-> **Note**
-> This is a work in progress, and at the moment won't do anything useful, aside from spewing some debug info into the console.
-
 This program scans your Google photos, and saves a list of every media that takes space from your account into the `photos.txt` file, and into `photos.json`, where the first line is the number of such media, the second line is the total number of media in your account, each subsequent line is an empty line, followed by a link to such a photo, followed by the size in bytes, and repeat.
 
 Go to Google Photos, open Dev Tools by F12, or however else it is done in your browser. Go to the network tab, and refresh the page. Now, find the request to `/`, scroll down to Request headers, right click on cookie, and hit `Copy Value`. Now, create a new file `cookie.txt`, next to all the code files (`main.js`, `package.json`, etc.), and paste that cookie in there.
