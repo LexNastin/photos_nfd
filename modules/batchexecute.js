@@ -25,9 +25,19 @@ function gen_be(request, bl, at, fsid, reqid) {
       }
     );
     let temp = {};
-    JSON.parse(resp.data.split("\n")[3]).forEach((item) => {
+    let respDeco = JSON.parse(resp.data.split("\n")[3]);
+    respDeco.forEach((item) => {
       try {
-        temp[item[1]] = JSON.parse(item[2]);
+        if (!temp[item[1]]) {
+          temp[item[1]] = JSON.parse(item[2]);
+        } else {
+          if (temp[item[1]][0] != "multiple") {
+            let tmp = temp[item[1]];
+            temp[item[1]] = ["multiple", tmp];
+          }
+          let length = temp[item[1]].length;
+          temp[item[1][length]] = JSON.parse(item[2]);
+        }
       } catch (err) {
         return undefined;
       }

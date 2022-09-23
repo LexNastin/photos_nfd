@@ -19,6 +19,7 @@ const batchexecute = require("./modules/batchexecute")(
 );
 const getPhotoDates = require("./modules/getPhotoDates")(batchexecute);
 const getPhotoIds = require("./modules/getPhotoIds")(batchexecute);
+const getPhotos = require("./modules/getPhotos")(batchexecute);
 
 function authenticate() {
   let resp = prompt("Paste https://photos.google.com/ cookie here: ");
@@ -61,8 +62,14 @@ function getWIZValues(cookie, photosRequest) {
   getWIZValues(cookie, photosRequest);
   let photoDates = await getPhotoDates(cookie, photosRequest);
   let photoIds = await getPhotoIds(cookie, photoDates);
-  let photoIdsFD = fs.openSync(path.join(__dirname, "./photos.txt"), "w+");
-  fs.writeSync(photoIdsFD, photoIds.join("\n"));
-  fs.closeSync(photoIdsFD);
-  console.log(photoIds);
+  let photos = await getPhotos(cookie, photoIds);
+  let photoFD = fs.openSync(path.join(__dirname, "./photos.txt"), "w+");
+  fs.writeSync(photoFD, `${photos.length}\n`);
+  fs.writeSync(photoFD, `${photoIds.length}\n`);
+  photos.forEach((photo) => {
+    fs.writeSync(photoFD, `\nhttps://photos.google.com/photo/${photo[0]}\n`);
+    fs.writeSync(photoFD, `${photo[1]}\n`);
+    fs.writeSync(photoFD, `${photo[2]}\n`);
+  });
+  fs.closeSync(photoFD);
 })();

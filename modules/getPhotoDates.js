@@ -1,6 +1,7 @@
 function gen_gpd(batchexecute) {
   return function getPhotoDates(cookie, photosRequest) {
     return new Promise(async (res, _) => {
+      console.log("Step 1:");
       let dataCallbacks = photosRequest.data.match(
         /AF_initDataCallback\((.*?)\)/g
       );
