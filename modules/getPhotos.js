@@ -31,8 +31,11 @@ async function worker(
         await timeout(3000);
       }
     }
-    if (!resp) break;
-    if (!resp["fDcn4b"]) console.log(resp);
+    if (!resp["fDcn4b"]) {
+      position -= iNumber;
+      await timeout(3000);
+      continue;
+    }
     let item = resp["fDcn4b"][0];
     if (item[30][0] == 1) {
       response[response.length] = [newItem, item[30][1], item[3]];

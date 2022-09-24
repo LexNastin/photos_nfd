@@ -73,10 +73,12 @@ function getWIZValues(cookie, photosRequest) {
   jsonOut["photos"] = [];
   photos.forEach((photo) => {
     fs.writeSync(photoFD, `\nhttps://photos.google.com/photo/${photo[0]}\n`);
+    fs.writeSync(photoFD, `${photo[0]}\n`);
     fs.writeSync(photoFD, `${photo[1]}\n`);
     fs.writeSync(photoFD, `${photo[2]}\n`);
     jsonOut["photos"] = jsonOut["photos"].concat({
       uri: `https://photos.google.com/photo/${photo[0]}`,
+      id: photo[0],
       size: photo[1],
       timestamp: photo[2],
     });

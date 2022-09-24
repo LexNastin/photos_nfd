@@ -28,14 +28,17 @@ Here's an example of the `photos.txt` file:
 374
 
 https://photos.google.com/photo/AF1QipSAF4094j0f43_-wfewv-w-e_c332uwj0j
+AF1QipSAF4094j0f43_-wfewv-w-e_c332uwj0j
 239048
 1663893487000
 
 https://photos.google.com/photo/AF1Qip4gWT65HY5g4-34f34f_34gioj34fj09je
+AF1Qip4gWT65HY5g4-34f34f_34gioj34fj09je
 349032
 1663793864000
 
 https://photos.google.com/photo/AF1Qipqwcprj9094380vdWDWFfd290d2--_2F3l
+AF1Qipqwcprj9094380vdWDWFfd290d2--_2F3l
 120493
 1663793786000
 ```
@@ -47,14 +50,17 @@ paid photos
 total photos
 
 link
+id
 size in bytes
 unix timestamp (ms)
 
 link
+id
 size in bytes
 unix timestamp (ms)
 
 link
+id
 size in bytes
 unix timestamp (ms)
 ```
